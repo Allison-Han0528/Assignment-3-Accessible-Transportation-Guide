@@ -9,7 +9,7 @@ An interactive Mapbox GL JS web map showing Access-A-Ride assessment centers and
 Access-A-Ride (AAR) is MTA NYC Transit's ADA-mandated paratransit service providing 24/7 shared-ride transportation for people whose disabilities prevent them from using the subway or bus.
 
 **This map shows:**
-- 🏥 AAR Assessment Centers — one per borough, where applicants are evaluated
+- 🏥 AAR Assessment Centers: one per borough, where applicants are evaluated
 - 🏛️ MTA Department of Paratransit HQ (130 Livingston St, Brooklyn)
 - ♿ Disability resource organizations that help riders navigate the system
 
