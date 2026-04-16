@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Inject Mapbox token into script.js
+      - name: Inject Mapbox token
         run: sed -i 's/MAPBOX_TOKEN_PLACEHOLDER/${{ secrets.MAPBOX_TOKEN }}/g' script.js
 
       - name: Deploy to GitHub Pages
