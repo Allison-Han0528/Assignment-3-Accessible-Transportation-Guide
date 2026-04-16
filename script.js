@@ -1,5 +1,5 @@
 // Token — replaced by GitHub Actions on deploy
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsaXNvbmhhbiIsImEiOiJjbW8wdTgycnEwYzk4MnJvbnNhZXdsazZsIn0.LL1lAMgKdb8sAuCJGwOQCQ';
+mapboxgl.accessToken = 'MAPBOX_TOKEN_PLACEHOLDER';
 
 // ── Color scheme by type ──────────────────────────────────────────────────
 const TYPE_CONFIG = {
