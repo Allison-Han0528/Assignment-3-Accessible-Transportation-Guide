@@ -1,0 +1,430 @@
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Variables ── */
+:root {
+  --subway: #0039A6;
+  --ferry:  #0098C3;
+  --taxi:   #F8B800;
+  --aar:    #C0392B;
+
+  --ink:    #1a1a2e;
+  --body:   #333333;
+  --sub:    #666677;
+  --border: #e0e4ed;
+  --bg:     #f5f6fa;
+  --white:  #ffffff;
+
+  --font: 'Calibri', 'Trebuchet MS', Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font);
+  overflow: hidden;
+  color: var(--body);
+  background: var(--bg);
+}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 370px;
+  height: 100vh;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 3px 0 20px rgba(0,0,0,0.07);
+}
+
+#map {
+  position: fixed;
+  top: 0;
+  left: 370px;
+  right: 0;
+  bottom: 0;
+}
+
+/* ══════════════════════════════
+   TOP ACCENT BAR
+   — four-color stripe referencing
+     the NYC transit color system
+══════════════════════════════ */
+#top-bar {
+  height: 5px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to right,
+    var(--subway) 0%,   var(--subway) 25%,
+    var(--ferry)  25%,  var(--ferry)  50%,
+    var(--taxi)   50%,  var(--taxi)   75%,
+    var(--aar)    75%,  var(--aar)    100%
+  );
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+#header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.overline {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--subway);
+  margin-bottom: 7px;
+}
+
+h1 {
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 11px;
+}
+
+.desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--sub);
+}
+
+/* ══════════════════════════════
+   STATS
+══════════════════════════════ */
+#stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.stat-item {
+  padding: 12px 0;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--subway);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--sub);
+  line-height: 1.4;
+}
+
+/* ══════════════════════════════
+   FILTER BUTTONS
+══════════════════════════════ */
+#filters {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--sub);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  border-color: var(--subway);
+  color: var(--subway);
+}
+
+.filter-btn.active {
+  background: var(--subway);
+  border-color: var(--subway);
+  color: var(--white);
+}
+
+.filter-btn[data-type="subway"].active  { background: var(--subway); border-color: var(--subway); }
+.filter-btn[data-type="ferry"].active   { background: var(--ferry);  border-color: var(--ferry);  }
+.filter-btn[data-type="taxi"].active    { background: #d4a000;       border-color: #d4a000; color: var(--white); }
+.filter-btn[data-type="aar"].active     { background: var(--aar);    border-color: var(--aar);    }
+
+/* ══════════════════════════════
+   CTA
+══════════════════════════════ */
+#cta {
+  padding: 8px 18px 6px;
+  font-size: 11.5px;
+  color: var(--sub);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   LOCATION LIST
+══════════════════════════════ */
+#loc-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 14px 16px;
+}
+
+#loc-list::-webkit-scrollbar { width: 4px; }
+#loc-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.loc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.loc-item:hover {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+.loc-item.active {
+  background: #eef2fb;
+  border-color: var(--subway);
+}
+
+.loc-item.hidden {
+  display: none;
+}
+
+/* Left color bar instead of a dot */
+.loc-bar {
+  flex-shrink: 0;
+  width: 4px;
+  height: 100%;
+  min-height: 44px;
+  border-radius: 2px;
+  align-self: stretch;
+}
+
+.loc-body { flex: 1; min-width: 0; }
+
+.loc-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.loc-addr {
+  font-size: 11px;
+  color: var(--sub);
+  margin-bottom: 4px;
+}
+
+.loc-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1px 7px;
+  border-radius: 3px;
+  color: var(--white);
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+#footer {
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#footer span {
+  font-size: 10.5px;
+  color: #aaa;
+}
+
+#footer a {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--subway);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#footer a:hover { text-decoration: underline; }
+
+/* ══════════════════════════════
+   LEGEND
+══════════════════════════════ */
+#legend {
+  position: fixed;
+  bottom: 28px;
+  right: 14px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 12px 15px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.10);
+  z-index: 5;
+  font-size: 12.5px;
+}
+
+.legend-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sub);
+  margin-bottom: 9px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--body);
+  font-size: 12px;
+}
+
+.legend-row:last-child { margin-bottom: 0; }
+
+.ldot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   POPUP (Mapbox override)
+══════════════════════════════ */
+.mapboxgl-popup-content {
+  font-family: var(--font) !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14) !important;
+  border: 1px solid var(--border) !important;
+  min-width: 250px;
+  max-width: 280px;
+}
+
+.mapboxgl-popup-tip { border-top-color: var(--white) !important; }
+
+.mapboxgl-popup-close-button {
+  color: var(--sub) !important;
+  font-size: 16px !important;
+  padding: 8px 11px !important;
+  right: 0 !important;
+  top: 0 !important;
+  background: transparent !important;
+}
+
+/* Popup color header strip */
+.popup-header {
+  height: 5px;
+  border-radius: 8px 8px 0 0;
+}
+
+.popup-body {
+  padding: 13px 15px 14px;
+}
+
+.popup-type {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.popup-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.popup-addr {
+  font-size: 11.5px;
+  color: var(--sub);
+  margin-bottom: 9px;
+}
+
+.popup-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #555;
+  border-top: 1px solid var(--border);
+  padding-top: 9px;
+}
+
+.popup-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.popup-link:hover { text-decoration: underline; }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 680px) {
+  #sidebar {
+    width: 100%;
+    height: 45vh;
+    top: auto; bottom: 0;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+  #map { left: 0; bottom: 45vh; }
+  #legend { bottom: calc(45vh + 8px); right: 8px; }
+}

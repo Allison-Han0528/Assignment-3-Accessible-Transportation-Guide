@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NYC Accessible Transportation Guide</title>
+
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+
+    <div id="sidebar">
+
+      <!-- Top accent bar -->
+      <div id="top-bar"></div>
+
+      <!-- Header -->
+      <div id="header">
+        <p class="overline">New York City</p>
+        <h1>Accessible<br>Transportation<br>Guide</h1>
+        <p class="desc">
+          Finding accessible transit in NYC can be challenging, only about 
+          28% of subway stations are ADA-compliant. This map brings together 
+          accessible subway stations, ferry terminals, WAV taxi services, and 
+          paratransit resources in one place.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats">
+        <div class="stat-item">
+          <div class="stat-num">~130</div>
+          <div class="stat-label">ADA subway<br>stations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">9+</div>
+          <div class="stat-label">Ferry<br>terminals</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">WAV taxi<br>dispatch</div>
+        </div>
+      </div>
+
+      <!-- Filter buttons -->
+      <div id="filters">
+        <button class="filter-btn active" data-type="all">All</button>
+        <button class="filter-btn" data-type="subway">Subway</button>
+        <button class="filter-btn" data-type="ferry">Ferry</button>
+        <button class="filter-btn" data-type="taxi">WAV Taxi</button>
+        <button class="filter-btn" data-type="aar">Access-A-Ride</button>
+      </div>
+
+      <!-- CTA -->
+      <p id="cta">Click a marker or select a location below.</p>
+
+      <!-- Location list -->
+      <div id="loc-list"></div>
+
+      <!-- Footer -->
+      <div id="footer">
+        <span>Source: MTA, NYC TLC, NYC Ferry — 2024</span>
+        <a href="https://new.mta.info/accessibility" target="_blank" rel="noopener">
+          MTA Accessibility →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Legend -->
+    <div id="legend">
+      <div class="legend-label">Transportation Type</div>
+      <div class="legend-row"><span class="ldot" style="background:#0039A6"></span>Accessible Subway</div>
+      <div class="legend-row"><span class="ldot" style="background:#0098C3"></span>Ferry Terminal</div>
+      <div class="legend-row"><span class="ldot" style="background:#F8B800"></span>WAV Taxi / Rideshare</div>
+      <div class="legend-row"><span class="ldot" style="background:#C0392B"></span>Access-A-Ride</div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
